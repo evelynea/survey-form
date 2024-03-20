@@ -1,9 +1,11 @@
 import './App.css';
 import LocationForm from './form';
+import StepForm from './formLayout';
 
 function App() {
   return (
-    <LocationForm/>
+    <StepForm/>
+    // <LocationForm/>
   );
 }
 

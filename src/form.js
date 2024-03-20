@@ -1,102 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function LocationForm() {
-  const submitFormData = (formData) => {
-    // Implement the logic to handle form data submission
-    console.log("success");
-    console.log('Form data submitted:', formData);
-    // For example, you can send the data to a server using fetch or Axios
-    // Fetch the feature layer using ArcGIS REST API
-    const token = 'okwW3JMV2Ut7Iv5aChlEH2C1q-eVVgRCxRnRMt4adQBtVWKmwilJRHE_mqnzpaON6UewrN5WWeedaUxpA3S4GNS_hrH38zQLvQ1EZ2PffmOHU5-RjWpZo0XI7r32j6zroZ-4cUa56WwdwOZj4HspLETGuqZE22msl50hh2cFBGE.';
-    const featureLayerUrl = 'https://esrirw.rw/server/rest/services/Hosted/Survey111/FeatureServer/0';
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(formData)
-    
-  };
-  
-    // try {
-    //   const response = await fetch(featureLayerUrl, requestOptions);
-    //   if (!response.ok) {
-    //     throw new Error('Failed to add feature');
-    //   }
-    //   const data = await response.json();
-    //   console.log('Feature added successfully:', data);
-    // } catch (error) {
-    //   console.error('Error adding feature:', error);
-    // }
-  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const fname = formData.get('fname');
-    const lname = formData.get('lname');
-    const crimeType = formData.get('crimeType');
-    const phoneNumber = formData.get('phoneNumber');
-    const injured = formData.get('injured');
-    const victims = formData.get('victims');
-    const district = formData.get('district');
-    const sector = formData.get('sector');
-    const street = formData.get('street');
-    const details = formData.get('details');
-    
-    const formDataObject = {
-      fname: fname,
-      lname: lname,
-      crimeType: crimeType,
-      phoneNumber: phoneNumber,
-      injured: injured,
-      victims: victims,
-      district: district,
-      sector: sector,
-      street: street,
-      details: details
-    };
-    console.log(formDataObject); // Display form data in the console
+//   const [fname, SetFname] = useState("")
+//   const [lname, setLname] = useState("")
+//   // const axios = require('axios');
+// const FormData = require('form-data');
+// let data = new FormData();
+// data.append('features', `[{\n"attributes":{\n"fname": "${fname}",\n"lname": "${lname}"\n}\n}]`);
+// data.append('f', 'pjson');
 
-    const featureData = {
-      features: [{
-        attributes: {
-          Fname: fname,
-          Lname: lname,
-          CrimeType: crimeType,
-          PhoneNumber: phoneNumber,
-          Injured: injured,
-          Victims: victims,
-          District: district,
-          Sector: sector,
-          Street: street,
-          Details: details
-        }
-      }]
-    };
+// let config = {
+//   method: 'post',
+//   maxBodyLength: Infinity,
+//   url: 'https://esrirw.rw/server/rest/services/Hosted/Survey111/FeatureServer/0/addFeatures/applyEdits?token=tAgiheaJgpcH1XyEzfkqktjXj4_IJP-fwcp6hMd4PoUaAxU2RFAYG1AfzX1uQwcFJ2l3HYTV8hepRg-D136hDPQldHfDGAjXt9XSSNSIvcHFZbT9YfmqP-6Ht86UyHCZfV4Eoy4sFOwLHeyC2Z_f6TpPlSr0PqF8kphM-CwdKUE.',
+//   headers: { 
+//     'Cookie': 'AGS_ROLES="FA55mMB1e7bWn/RvUcdykdmwHvTKXplxgUBG9vgmtH8KGVNmofnRJVsOI4IIseEt8s45QSxnioI8leX+UVvQew=="', 
+//     ...data.getHeaders()
+//   },
+//   data : data
+// };
 
-    // try {
-    //   const response = await fetch('https://esrirw.rw/server/rest/services/Hosted/Survey111/FeatureServer/0', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded',
-    //     },
-    //     body: JSON.stringify(featureData),
-    //   });
-  
-    //   if (!response.ok) {
-    //     throw new Error('Failed to add feature');
-    //   }
-  
-    //   const data = await response.json();
-    //   console.log('Feature added successfully:', data);
-    // } catch (error) {
-    //   console.error('Error adding feature:', error);
-    // }
+// axios.request(config)
+// .then((response) => {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
 
-    submitFormData(featureData);
-  };
   
   
   return (
@@ -108,7 +40,7 @@ export default function LocationForm() {
           Crime Report Form
 
           </div>
-          <form onSubmit={handleSubmit}>
+          <form >
             <div className="grid gap-6 mb-6 lg:grid-cols-2">
               <div>
                 <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First name</label>
@@ -167,7 +99,7 @@ export default function LocationForm() {
             </div>
 
             <div>
-              <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">More details</label>
+              <label htmlFor="details" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">More details</label>
               <textarea name='details' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4" placeholder="Provide any more relevant details" />
             </div>
             <button type="submit" aria-label="Submit form" className="text-white bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
