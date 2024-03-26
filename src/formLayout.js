@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const StepForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [nextClicked, setNextClicked] = useState(false);
+  const [ setNextClicked] = useState(false);
 
   const [formData, setFormData] = useState({
     step1: '',
@@ -50,9 +50,7 @@ const StepForm = () => {
     return isValid;
   };
 
-  const goToStep = (step) => {
-    setCurrentStep(step);
-  };
+  
 
   const nextStep = () => {
     const isValid = validateStep(currentStep);
